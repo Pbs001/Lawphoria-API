@@ -1,0 +1,7 @@
+openai
+langchain
+unstructured
+pdfminer.six
+pdf2image
+tiktoken
+pinecone-client
