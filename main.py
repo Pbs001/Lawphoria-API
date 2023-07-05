@@ -1,6 +1,7 @@
 from langchain.document_loaders import UnstructuredPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
+#Loading the Data
 loader = UnstructuredPDFLoader("CompaniesAct2013.pdf")
 data = loader.load()
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
@@ -10,12 +11,13 @@ from langchain.vectorstores import Chroma, Pinecone
 from langchain.embeddings.openai import OpenAIEmbeddings
 import pinecone
 
-OPENAI_API_KEY = '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'
-PINECONE_API_KEY = '7f4379ca-0248-4911-a284-4149cb92575c'
+#Initializing the API keys
+OPENAI_API_KEY = #your openai's API key
+PINECONE_API_KEY = #your pinecone's API key
 PINECONE_API_ENV = 'us-west4-gcp'
 embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
 
-# initialize pinecone
+#Initialize pinecone
 pinecone.init(
     api_key=PINECONE_API_KEY,  # find at app.pinecone.io
     environment=PINECONE_API_ENV  # next to api key in console
@@ -28,6 +30,7 @@ from langchain.chains.question_answering import load_qa_chain
 llm = OpenAI(temperature=0, openai_api_key=OPENAI_API_KEY)
 chain = load_qa_chain(llm, chain_type="stuff")
 
+#Creating API end point
 from flask import Flask , jsonify
 app = Flask(__name__)
 @app.route('/')
